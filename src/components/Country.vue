@@ -4,7 +4,11 @@
         <div class="card-body"  >
             <h5 class="card-title">{{aCountry.name}}</h5>
             <p class="card-text">{{aCountry.capital}}</p>
-            <a href="#" class="btn btn-primary">Detailed info</a>
+            <a href="#" class="btn btn-info">
+                <router-link :to="'/countries/'+country.numericCode+'/info'" class="details-container">
+                    <span class="details-text">Details</span><i class="material-icons">subject</i>
+                </router-link>
+            </a>
         </div>
     </div>
 </template>
@@ -30,5 +34,12 @@
 <style scoped>
     .card{
         margin: 10px;
+    }
+    .details-container{
+        display: flex;
+        justify-content: center;
+        color: white;
+        text-decoration: none;
+        outline: none;
     }
 </style>

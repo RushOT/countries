@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import About from './views/About.vue'
 import Random from './views/Random.vue'
+import Info from './views/Info.vue'
 
 Vue.use(Router);
 
@@ -25,6 +26,12 @@ export default new Router({
           path: '/random',
           name: 'random',
           component: Random
+      },
+      {
+          path: '/countries/:id/info',
+          name: 'info',
+          component: Info,
+          props: true
       }
 
   ],

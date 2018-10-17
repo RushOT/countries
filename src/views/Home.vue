@@ -5,7 +5,7 @@
           </letter>
       </div>
       <div class="row">
-          <country v-for="country in countries | byLetter" v-bind:key="country.numericCode" v-bind:country="country" ></country>
+          <country v-for="country in filteredCountries(countries)" v-bind:key="country.numericCode" v-bind:country="country" ></country>
       </div>
   </div>
 </template>
@@ -23,7 +23,6 @@
         data () {
             return {
                 countries: [],
-                cloneCountries: [],
                 letters: "abcdefghijklmnopqrstuvwxyz".split(""),
                 currentLetter: ''
             }
@@ -33,7 +32,6 @@
             axios.get('https://restcountries.eu/rest/v2/all')
                 .then(response => {
                     this.countries = response.data;
-                    this.cloneCountries = response.data;
                 })
                 .catch(error => {console.log(error)});
         },
@@ -41,15 +39,22 @@
         methods: {
             filterByLetter(letter) {
                 this.currentLetter = letter;
+                
             },
 
-        },
-
-        filters: {
-            byLetter: function() {
-                console.log('asd')
-                //return this.currentLetter === '' || country.name[0].toLowerCase() === this.currentLetter.toLowerCase();
+            filteredCountries(countries) {
+                if(this.currentLetter === ''){
+                    return this.countries;
+                }
+                return countries.filter(country => {
+                    return country.name.charAt(0).toLowerCase() === this.currentLetter.toLowerCase();
+                });
             }
+
+        },
+        
+        computed:{
+
         }
     }
 </script>
